@@ -13,6 +13,8 @@ public class PlayerCharacter : CharacterBase
     public Attack attackState;
     public Crouch crouchState;
 
+    Vector3 lastSafePos;
+
     protected override void Awake()
     {
         base.Awake();
@@ -52,6 +54,10 @@ public class PlayerCharacter : CharacterBase
         {
             ChangeState(CharacterState.Jump);
         }
+        else
+        {
+            lastSafePos = (Vector2)transform.position - (characterRigidbody.velocity * .3f);
+        }
 
         AddMovement(Input.GetAxisRaw("Horizontal"));
         animator.SetFloat("VelocityY", characterRigidbody.velocity.y);
@@ -70,19 +76,19 @@ public class PlayerCharacter : CharacterBase
             ChangeState(CharacterState.Dash);
         }
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            int attackCombo = attackState.DoAttack();
-            if (attackCombo == 1)
-            {
-                animator.SetTrigger("Attack");
-            }
-            else if(attackCombo > 1)
-            {
-                Debug.Log("AttackNext : " + attackCombo);
-                animator.SetTrigger("AttackNext");
-            }
-        }
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+        //    int attackCombo = attackState.DoAttack();
+        //    if (attackCombo == 1)
+        //    {
+        //        animator.SetTrigger("Attack");
+        //    }
+        //    else if(attackCombo > 1)
+        //    {
+        //        Debug.Log("AttackNext : " + attackCombo);
+        //        animator.SetTrigger("AttackNext");
+        //    }
+        //}
 
         if(currentState == CharacterState.Idle || currentState == CharacterState.Crouch)
         {
@@ -133,5 +139,10 @@ public class PlayerCharacter : CharacterBase
     protected void JumpCross()
     {
         animator.SetTrigger("JumpCross");
+    }
+
+    public void BackToSafePos()
+    {
+        transform.position = lastSafePos;
     }
 }

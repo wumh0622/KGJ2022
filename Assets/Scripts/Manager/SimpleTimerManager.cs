@@ -10,7 +10,7 @@ public class SimpleTimerManager : Singleton<SimpleTimerManager>
     {
         if(timerList.ContainsKey(onStateOver))
         {
-            return;
+            StopTimer(onStateOver);
         }
         IEnumerator newTimer = StateTimerUpdate(onStateOver, stateTimer);
         timerList.Add(onStateOver, newTimer);

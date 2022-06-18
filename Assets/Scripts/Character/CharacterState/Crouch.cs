@@ -64,7 +64,10 @@ public class Crouch : StateBase
             }
             else
             {
-                hitObject = hitInfoCache.collider.gameObject;
+                if(hitInfoCache.collider)
+                {
+                    hitObject = hitInfoCache.collider.gameObject;
+                }
             }
         }
         return result;
