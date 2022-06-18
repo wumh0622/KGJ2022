@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,9 @@ public class PlayerCharacter : CharacterBase
     public Climb climbState;
     public Attack attackState;
     public Crouch crouchState;
+
+    public GameObject Girl;
+    public ParticleSystem scanEffect;
 
     Vector3 lastSafePos;
 
@@ -76,6 +80,11 @@ public class PlayerCharacter : CharacterBase
             ChangeState(CharacterState.Dash);
         }
 
+        if(Input.GetButtonDown("Scan"))
+        {
+            Scan();
+        }
+
         //if (Input.GetButtonDown("Fire1"))
         //{
         //    int attackCombo = attackState.DoAttack();
@@ -110,6 +119,16 @@ public class PlayerCharacter : CharacterBase
                     ChangeState(CharacterState.Idle);
                 }
             }
+        }
+    }
+
+    private void Scan()
+    {
+        ColliderDrawer[] platforms = Girl.GetComponentsInChildren<ColliderDrawer>();
+        foreach (ColliderDrawer item in platforms)
+        {
+            scanEffect.Play();
+            item.ShowScanEffect();
         }
     }
 

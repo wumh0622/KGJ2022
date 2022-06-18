@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     private bool _gameStart;
     private int _targetIndex = 0;
 
+    public GameObject player;
+
     void Start()
     {
         Init();
