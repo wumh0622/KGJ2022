@@ -6,31 +6,32 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("GameObject")]
     public Text TimerText;
+    public Slider ScoreBar;
 
+    [Header("Setting")]
     public int ScoreMax;
-    public int PreSetTime;
-    public List<float> ChangeTargetTimeTrigger;
+    public int PresetTime;
+    public List<float> ChangeTargetTime;
 
     private int _score;
     public float _time;
-    private List<float> _changeTargetTrigger;
+    private List<float> _changeTargetTime;
 
-    private bool _gameStart = true;
+    private bool _gameStart;
     private int _targetIndex = 0;
 
     void Start()
     {
         Init();
+
+        _gameStart = true;
     }
 
     void Update()
     {
-        if(!_gameStart)
-        {
-            return;
-        }
-
+        //Test
         if (Input.GetKeyUp(KeyCode.Q))
         {
             IncreaseScore(1);
@@ -40,43 +41,52 @@ public class GameManager : MonoBehaviour
         {
             DecreaseScore(1);
         }
+        //Test
+
+        if (!_gameStart)
+        {
+            print("Game Over");
+            return;
+        }
 
         Timer();
     }
 
     public void IncreaseScore(int value)
     {
-        _score += value;
-        print(_score);
-        if(_score >= ScoreMax)
+        int score = _score + value;
+        if (score >= ScoreMax)
         {
-            _score = ScoreMax;
+            score = ScoreMax;
             OnScoreMax();
         }
+
+        SetScore(score);
     }
 
     public void DecreaseScore(int value)
 	{
-        _score -= value;
-        print(_score);
-        if (_score <= 0)
-		{
-            _score = 0;
+        int score = _score - value;
+        if(score <= 0)
+        {
+            score = 0;
             OnScoreZero();
         }
+
+        SetScore(score);
     }
 
-    private int GetCurrentTargetIndex(float time)
+    private int GetCurrentTimeIndex(float time)
     {
-        for (int i = 0; i < _changeTargetTrigger.Count; i++)
+        for (int i = 0; i < _changeTargetTime.Count; i++)
         {
-            if(time > _changeTargetTrigger[i])
+            if(time > _changeTargetTime[i])
             {
                 return i;
             }
         }
 
-        return _changeTargetTrigger.Count;
+        return _changeTargetTime.Count;
     }
 
     private void Timer()
@@ -84,9 +94,10 @@ public class GameManager : MonoBehaviour
         if (_time > 0)
         {
             _time -= Time.deltaTime;
-            int index = GetCurrentTargetIndex(_time);
+            int index = GetCurrentTimeIndex(_time);
             if (_targetIndex != index)
             {
+                _targetIndex = index;
                 OnChangeTarget(index);
             }
         }
@@ -97,7 +108,10 @@ public class GameManager : MonoBehaviour
             OnTimeUp();
         }
 
-        TimerText.text = _time.ToString("0.00");
+        if (TimerText != null)
+        {
+            TimerText.text = _time.ToString("0.00");
+        }
     }
 
     private void OnScoreZero()
@@ -118,15 +132,28 @@ public class GameManager : MonoBehaviour
 
     private void OnChangeTarget(int targetIndex)
     {
-        _targetIndex = targetIndex;
-        print(_targetIndex);
+        print(targetIndex);
+
+        SetScore(0);
+    }
+
+    private void SetScore(int score, int scoreMax = -1)
+    {
+        _score = score;
+        ScoreBar.value = score;
+
+        if(scoreMax != -1)
+        {
+            ScoreBar.maxValue = scoreMax;
+        }
     }
 
     private void Init()
     {
-        _score = 0;
-        _time = PreSetTime;
+        SetScore(0, ScoreMax);
 
-        _changeTargetTrigger = ChangeTargetTimeTrigger.OrderByDescending(e => e).ToList();
+        _time = PresetTime;
+
+        _changeTargetTime = ChangeTargetTime.OrderByDescending(e => e).ToList();
     }
 }
