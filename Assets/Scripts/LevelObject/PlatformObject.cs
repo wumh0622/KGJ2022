@@ -4,28 +4,42 @@ using UnityEngine;
 
 public class PlatformObject : MonoBehaviour
 {
-    public LayerMask defaultThroughLayerMask;
-    public LayerMask playerThroughLayerMask;
-    public float resetTime;
+    public int defaultThroughLayerMask = 7;
+    public int playerThroughLayerMask = 8;
+    public float resetTime = .5f;
 
     bool through;
     PlatformEffector2D platformEffector;
+    Collider2D collider;
 
     private void Awake()
     {
         platformEffector = GetComponent<PlatformEffector2D>();
+        collider = GetComponent<Collider2D>();
     }
 
     public void ThroughPlatform()
     {
         through = true;
-        platformEffector.colliderMask = playerThroughLayerMask;
+        gameObject.layer = playerThroughLayerMask;
+        collider.isTrigger = true;
+        SimpleTimerManager.Instance.RunTimer(ResetPlatform, resetTime);
+        //if (platformEffector)
+        //{
+        //    platformEffector.colliderMask = playerThroughLayerMask;
+        //}
+
     }
 
     public void ResetPlatform()
     {
         through = false;
-        platformEffector.colliderMask = defaultThroughLayerMask;
+        gameObject.layer = defaultThroughLayerMask;
+        collider.isTrigger = false;
+        //if (platformEffector)
+        //{
+        //    platformEffector.colliderMask = defaultThroughLayerMask;
+        //}
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

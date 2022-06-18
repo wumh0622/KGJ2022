@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,11 @@ public class PlayerCharacter : CharacterBase
     public Climb climbState;
     public Attack attackState;
     public Crouch crouchState;
+
+    public GameObject Girl;
+    public ParticleSystem scanEffect;
+
+    Vector3 lastSafePos;
 
     protected override void Awake()
     {
@@ -52,6 +58,10 @@ public class PlayerCharacter : CharacterBase
         {
             ChangeState(CharacterState.Jump);
         }
+        else
+        {
+            lastSafePos = (Vector2)transform.position - (characterRigidbody.velocity * .3f);
+        }
 
         AddMovement(Input.GetAxisRaw("Horizontal"));
         animator.SetFloat("VelocityY", characterRigidbody.velocity.y);
@@ -70,19 +80,24 @@ public class PlayerCharacter : CharacterBase
             ChangeState(CharacterState.Dash);
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if(Input.GetButtonDown("Scan"))
         {
-            int attackCombo = attackState.DoAttack();
-            if (attackCombo == 1)
-            {
-                animator.SetTrigger("Attack");
-            }
-            else if(attackCombo > 1)
-            {
-                Debug.Log("AttackNext : " + attackCombo);
-                animator.SetTrigger("AttackNext");
-            }
+            Scan();
         }
+
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+        //    int attackCombo = attackState.DoAttack();
+        //    if (attackCombo == 1)
+        //    {
+        //        animator.SetTrigger("Attack");
+        //    }
+        //    else if(attackCombo > 1)
+        //    {
+        //        Debug.Log("AttackNext : " + attackCombo);
+        //        animator.SetTrigger("AttackNext");
+        //    }
+        //}
 
         if(currentState == CharacterState.Idle || currentState == CharacterState.Crouch)
         {
@@ -104,6 +119,16 @@ public class PlayerCharacter : CharacterBase
                     ChangeState(CharacterState.Idle);
                 }
             }
+        }
+    }
+
+    private void Scan()
+    {
+        ColliderDrawer[] platforms = Girl.GetComponentsInChildren<ColliderDrawer>();
+        foreach (ColliderDrawer item in platforms)
+        {
+            scanEffect.Play();
+            item.ShowScanEffect();
         }
     }
 
@@ -133,5 +158,10 @@ public class PlayerCharacter : CharacterBase
     protected void JumpCross()
     {
         animator.SetTrigger("JumpCross");
+    }
+
+    public void BackToSafePos()
+    {
+        transform.position = lastSafePos;
     }
 }
