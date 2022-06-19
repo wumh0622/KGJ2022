@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -17,7 +15,9 @@ public class AI_Controller : MonoBehaviour
     private AI_State_None mState_None = new AI_State_None();
     private AI_State_Angry mState_Angry = new AI_State_Angry();
     private AI_State_Shy mState_Shy = new AI_State_Shy();
+    private AI_State_Confuse mState_Confuse = new AI_State_Confuse();
     private AI_State_TopAtk mState_TopAtk = null;
+    private AI_State_HandAtk mState_HandAtk = null;
 
     private float mCurAtkGap = 0;
 
@@ -29,9 +29,16 @@ public class AI_Controller : MonoBehaviour
     {
         if (mAIData != null && mCurState == mState_None && Time.time >= mCurAtkGap)
         {
-            mCurState = mState_TopAtk;
-            mState_TopAtk.StartPerform(mAIData);
-            mCurAtkGap = mAIData.GetNextATKDelay();
+            if (Random.Range(0, 100) < 50)
+            {
+                mCurState = mState_TopAtk;
+                mState_TopAtk.StartPerform(mAIData);
+            }
+            else
+            {
+                mCurState = mState_HandAtk;
+                mState_HandAtk.StartPerform(mAIData);
+            }
         }
     }
 
@@ -41,6 +48,7 @@ public class AI_Controller : MonoBehaviour
         MediatorManager<string>.Instance.Subscribe(AI_State.State_Nothing, F_State_Nothing);
         MediatorManager<string>.Instance.Subscribe(AI_State.State_Angry, F_State_Angry);
         MediatorManager<string>.Instance.Subscribe(AI_State.State_Shy, F_State_Shy);
+        MediatorManager<string>.Instance.Subscribe(AI_State.State_Confuse, F_State_Confuse);
     }
 
     private void StartPerform()
@@ -51,18 +59,36 @@ public class AI_Controller : MonoBehaviour
 
     private void F_State_Nothing(object iKey, MediatorArgs<string> iArgs)
     {
+        mCurAtkGap = mAIData.GetNextATKDelay();
+        SkipState();
         mCurState = mState_None;
         StartPerform();
     }
     private void F_State_Angry(object iKey, MediatorArgs<string> iArgs)
     {
+        SkipState();
         mCurState = mState_Angry;
         StartPerform();
     }
     private void F_State_Shy(object iKey, MediatorArgs<string> iArgs)
     {
+        SkipState();
         mCurState = mState_Shy;
         StartPerform();
+    }
+    private void F_State_Confuse(object iKey, MediatorArgs<string> iArgs)
+    {
+        SkipState();
+        mCurState = mState_Confuse;
+        StartPerform();
+    }
+
+    private void SkipState()
+    {
+        if (mCurState != null)
+        {
+            mCurState.Skip();
+        }
     }
 
     /// <summary>
@@ -87,9 +113,9 @@ public class AI_Controller : MonoBehaviour
             aSeq.AppendInterval(2).OnComplete(() => DestroyImmediate(aClearObj));
         }
         mAIData = iArgs.Args;
-        mCurAtkGap = Time.time + mAIData.mStartAtkDelay;
         mAIData.CreatAI(transform);
         mState_TopAtk = mAIData.mAIRoot.GetComponentInChildren<AI_State_TopAtk>();
+        mState_HandAtk = mAIData.mAIRoot.GetComponentInChildren<AI_State_HandAtk>();
         StartCoroutine(mAIData.FadeIn(mAIData.mRenderer));
         MediatorManager<string>.Instance.Publish(AI_State.State_Nothing, this, null);
     }

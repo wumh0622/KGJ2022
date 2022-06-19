@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AI_Character", menuName = "AI_Character/AI", order = 0)]
@@ -11,20 +10,30 @@ public class AI_Data : ScriptableObject
     public GameObject mAIObj = null;
     public Sprite mAngrySprite = null;
     public Sprite mShySprite = null;
+    public Sprite mConfuseSprite = null;
 
+    [Header("åæ‡‰åœ–ä½ç½®åç§»")]
+    public Vector3 mEventRendererOffset = Vector3.zero;
+
+    [Header("æ·¡å…¥æ·¡å‡ºæ™‚é–“")]
     public float mFadeSpeed = 0.005f;
+    [Header("æ”»æ“ŠLayer")]
+    public LayerMask mAtkLayerMask;
 
-    [Header("ÀH¾÷§ğÀ»")]
-    public float mStartAtkDelay = 3;
+    [Header("éš¨æ©Ÿæ”»æ“Š")]
     public float mMaxAtkDelay = 5f;
     public float mMinAtkDelay = 2f;
 
-
-    [Header("Top§ğÀ»")]
+    [Header("Topæ”»æ“Š")]
     public int mTopAtkMaxCount = 7;
     public int mTopAtkMinCount = 3;
     public float mMaxTopAtkSpeed = 0.5f;
     public float mMinTopAtkSpeed = 0.25f;
+    public Vector3 mTopCheckAtkPos = Vector3.one;
+
+    [Header("HandAtk")]
+    public float mHandMoveToTopTime = 0.55f;
+    public float mHandMoveDownTime = 0.2f;
 
     public void InitData()
     {
@@ -37,7 +46,7 @@ public class AI_Data : ScriptableObject
         InitData();
         GameObject aEventRender = new GameObject("EventRender");
         aEventRender.transform.SetParent(mAIRoot.transform);
-        aEventRender.transform.localPosition = Vector3.zero;
+        aEventRender.transform.localPosition = mEventRendererOffset;
         aEventRender.transform.localScale = Vector3.one;
         mEventRenderer = aEventRender.AddComponent<SpriteRenderer>();
         mEventRenderer.gameObject.SetActive(false);
@@ -76,5 +85,6 @@ public class AI_State
     public const string State_Nothing = "STATE_NOTHING";
     public const string State_Angry = "STATE_ANGRY";
     public const string State_Shy = "STATE_SHY";
+    public const string State_Confuse = "STATE_CONFUSE";
     public const string State_TopAtk = "STATE_TOPATK";
 }
