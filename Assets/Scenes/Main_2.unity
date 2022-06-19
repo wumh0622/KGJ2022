@@ -822,46 +822,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1555438518, guid: 77597d87b1cc86943bd16f999146b532, type: 3}
-      propertyPath: selectColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1555438518, guid: 77597d87b1cc86943bd16f999146b532, type: 3}
-      propertyPath: selectColor.b
-      value: 0.0037735105
-      objectReference: {fileID: 0}
-    - target: {fileID: 1555438518, guid: 77597d87b1cc86943bd16f999146b532, type: 3}
-      propertyPath: selectColor.g
-      value: 0.5683637
-      objectReference: {fileID: 0}
-    - target: {fileID: 1555438518, guid: 77597d87b1cc86943bd16f999146b532, type: 3}
-      propertyPath: selectColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1555438518, guid: 77597d87b1cc86943bd16f999146b532, type: 3}
-      propertyPath: defaultColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1555438518, guid: 77597d87b1cc86943bd16f999146b532, type: 3}
-      propertyPath: defaultColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1555438518, guid: 77597d87b1cc86943bd16f999146b532, type: 3}
-      propertyPath: defaultColor.g
-      value: 0.08871292
-      objectReference: {fileID: 0}
-    - target: {fileID: 1555438518, guid: 77597d87b1cc86943bd16f999146b532, type: 3}
-      propertyPath: defaultColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1555438518, guid: 77597d87b1cc86943bd16f999146b532, type: 3}
-      propertyPath: filter2D.useLayerMask
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1555438518, guid: 77597d87b1cc86943bd16f999146b532, type: 3}
-      propertyPath: filter2D.layerMask.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
     - target: {fileID: 3183223845121588752, guid: 77597d87b1cc86943bd16f999146b532, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
@@ -1372,9 +1332,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7a3780a5d7febce4792956b9b4c697a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fe9b77a5e31d870479a254844929eadb, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1584,7 +1544,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2109349209}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: NextLevel
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2373,6 +2333,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7946489111647044188, guid: c8d20bb62f3968a43b1e2aa884e5022a, type: 3}
+      propertyPath: characterName
+      value: "\u7948\u83C8\uFF1A"
+      objectReference: {fileID: 0}
     - target: {fileID: 7946489111647044189, guid: c8d20bb62f3968a43b1e2aa884e5022a, type: 3}
       propertyPath: m_Name
       value: Dialog_Box
@@ -3035,9 +2999,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9b849b167348a7d4fbe33d77f52da7c8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 52966f70dc8390e4da62f213b1456276, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -3202,7 +3166,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4E0B\u4E00\u95DC"
+  m_Text: "\u91CD\u65B0\u904A\u6232"
 --- !u!222 &2088985342
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3326,7 +3290,7 @@ MonoBehaviour:
   PresetTime: 180
   ChangeTargetTime: []
   player: {fileID: 1257724757}
-  AiData: {fileID: 11400000, guid: a1e00ca450ec88947baec81cd735c556, type: 2}
+  AiData: {fileID: 11400000, guid: 9b8b7e97a13dc1243ba8f81113ed18e2, type: 2}
   aiController: {fileID: 1911676288}
   girl: {fileID: 0}
   qG: {fileID: 0}

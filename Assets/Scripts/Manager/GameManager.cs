@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    const int sceneNum = 2;
     [Header("GameObject")]
     public Text TimerText;
     public Image ScoreBar;
@@ -73,6 +74,7 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
+        Time.timeScale = 1.0f;
         Init();
 
         _gameStart = true;
@@ -273,6 +275,12 @@ public class GameManager : Singleton<GameManager>
         MediatorManager<string>.Instance.Publish(AI_State.State_Nothing, this, null);
         qG.createQuestion();
         dialog.ClearRespond();
+    }
+
+    public void NextLevel()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(1);
     }
 
     public void Restart()

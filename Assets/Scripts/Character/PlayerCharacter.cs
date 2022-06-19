@@ -17,12 +17,15 @@ public class PlayerCharacter : CharacterBase
     public GameObject Girl;
     public ParticleSystem scanEffect;
 
+    PlayerTriggerler playerTriggerler;
+
     Vector3 lastSafePos;
 
     protected override void Awake()
     {
         base.Awake();
         animator = GetComponent<Animator>();
+        playerTriggerler = GetComponentInChildren<PlayerTriggerler>();
     }
 
     protected override void InitState()
@@ -124,6 +127,11 @@ public class PlayerCharacter : CharacterBase
         if (Input.GetButtonDown("Confirm"))
         {
             GameManager.Instance.ConfirmWord();
+        }
+
+        if(Input.GetButtonDown("Use"))
+        {
+            playerTriggerler.InputCollect();
         }
     }
 
