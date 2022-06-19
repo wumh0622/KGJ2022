@@ -43,4 +43,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e31adea58211484aba1343ce5b61620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DialogObj: {fileID: 0}
+  GOOD_entriesData:
+  - score: 30
+    text: "\u6211"
+  BAD_entriesData:
+  - score: -20
+    text: "\u597D\u60F3\u8981..."
+  - score: -10
+    text: "\u7D04 / \u55CE?"
+  DialogObj: {fileID: 6481989855047833600, guid: bb1a7ce72a11d7942856531c9550245b, type: 3}
+  spawnPoint:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnRadius: 1.27

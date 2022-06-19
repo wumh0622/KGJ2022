@@ -23,7 +23,7 @@ public class ColliderDrawer : MonoBehaviour
 
         for (int idx = 0; idx < collider2D.points.Length; idx++)
         {
-            points[idx] = (collider2D.points[idx] * transform.lossyScale) + (Vector2)transform.position;
+            points[idx] = (Vector2)transform.position + collider2D.offset + (Vector2)collider2D.points[idx];
         }
         line.positionCount = collider2D.points.Length;
         line.SetPositions(points);
