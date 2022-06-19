@@ -51,7 +51,7 @@ public class AI_Data : ScriptableObject
         aEventRender.transform.localPosition = mEventRendererOffset;
         aEventRender.transform.localScale = Vector3.one;
         mEventRenderer = aEventRender.AddComponent<SpriteRenderer>();
-        mEventRenderer.sortingLayerID = -5;
+        mEventRenderer.sortingOrder = -5;
         mEventRenderer.gameObject.SetActive(false);
     }
 

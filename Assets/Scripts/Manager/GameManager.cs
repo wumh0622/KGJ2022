@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -32,6 +33,12 @@ public class GameManager : Singleton<GameManager>
     private int _targetIndex = 0;
     private List<float> _changeTargetTime;
     private Dictionary<AudioKey, List<AudioClip>> _audioDict;
+    public PARTICLEREACTION pARTICLEREACTION;
+
+    public GameObject winPanel;
+    public GameObject losePanel;
+    public Text winText;
+    public Text loseText;
 
     public enum AudioKey
     {
@@ -79,7 +86,7 @@ public class GameManager : Singleton<GameManager>
         //Test
         if (Input.GetKeyUp(KeyCode.O))
         {
-            IncreaseScore(1);
+            IncreaseScore(50);
         }
 
         if (Input.GetKeyUp(KeyCode.L))
@@ -90,7 +97,7 @@ public class GameManager : Singleton<GameManager>
 
         if (!_gameStart)
         {
-            print("Game Over");
+            Time.timeScale = 0.0f;
             return;
         }
 
@@ -186,13 +193,16 @@ public class GameManager : Singleton<GameManager>
 
     private void OnScoreMax()
     {
-        print("Score Max");
+        Time.timeScale = 0.0f;
+        winPanel.SetActive(true);
+        winText.text = dialog.GetEndWord(true);
     }
 
     private void OnTimeUp()
     {
         _gameStart = false;
-        print("Time Up");
+        losePanel.SetActive(true);
+        loseText.text = dialog.GetEndWord(false);
     }
 
     private void OnChangeTarget(int targetIndex)
@@ -227,6 +237,7 @@ public class GameManager : Singleton<GameManager>
             {
                 MediatorManager<string>.Instance.Publish(AI_State.State_Shy, this, null);
                 dialog.ShowRespond(AI_State.State_Shy);
+                pARTICLEREACTION.PlayParticle(1);
             }
             else if (score < 0)
             {
@@ -235,9 +246,10 @@ public class GameManager : Singleton<GameManager>
             }
             else
             {
-                MediatorManager<string>.Instance.Publish(AI_State.State_Nothing, this, null);
+                MediatorManager<string>.Instance.Publish(AI_State.State_Confuse, this, null);
 
-                dialog.ShowRespond(AI_State.State_Nothing);
+                dialog.ShowRespond(AI_State.State_Confuse);
+                pARTICLEREACTION.PlayParticle(0);
             }
 
             IncreaseScore(score);
@@ -253,6 +265,18 @@ public class GameManager : Singleton<GameManager>
         MediatorManager<string>.Instance.Publish(AI_State.State_Nothing, this, null);
         qG.createQuestion();
         dialog.ClearRespond();
+    }
+
+    public void Restart()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(0);
+        
+    }
+
+    public void EndGame()
+    {
+        Application.Quit();
     }
 
 }

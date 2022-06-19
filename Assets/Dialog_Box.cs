@@ -245,12 +245,26 @@ public class Dialog_Box : MonoBehaviour
             case AI_State.State_Shy:
                 textMesh.text = characterName + feedBack_Good[Random.Range(0, feedBack_Good.Length)];
                 break;
-            case AI_State.State_Nothing:
+            case AI_State.State_Confuse:
                 textMesh.text = characterName + feedBack_What[Random.Range(0, feedBack_What.Length)];
                 break;
             default:
                 break;
         }
+    }
+
+    public string GetEndWord(bool win)
+    {
+        string result;
+        if(win)
+        {
+            result = characterName + feedBack_Win[Random.Range(0, feedBack_Win.Length)];
+        }
+        else
+        {
+            result = characterName + feedBack_lose[Random.Range(0, feedBack_lose.Length)];
+        }
+        return result;
     }
 
     public void ClearRespond()

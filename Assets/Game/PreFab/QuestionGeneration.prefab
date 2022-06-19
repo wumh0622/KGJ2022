@@ -45,12 +45,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GOOD_entriesData:
   - score: 30
-    text: "\u6211"
+    text: " \u6211 / \u559C\u6B61 / \u4F60"
+  - score: 30
+    text: " \u8ACB\u548C\u6211 / \u4EA4\u5F80"
+  - score: 90
+    text: "\u6211\u8001\u7238 / \u662F / \u9023OO"
+  - score: 30
+    text: " \u6211\u5728 / \u6BCF\u500B\u5B87\u5B99 / \u90FD\u611B\u4F60\u3002"
+  - score: 30
+    text: " \u7559\u4E0B\u4F86 / \u6216\u8005 / \u6211\u8DDF\u4F60\u8D70\u3002"
+  - score: 5
+    text: " \u6211\u559C\u6B61 / \u4F60\u662FVtuber / \u4F46\u6211\u66F4\u611B /
+      \u771F\u5BE6\u7684\u4F60"
+  - score: 10
+    text: "\u6BD4\u8D77\u6CB3\u6D41 / \u6211\u66F4\u60F3\u8B8A\u6210\u5929\u7A7A
+      / \u5982\u679C\u80FD\u8B8A\u6210\u5929\u7A7A / \u5C31\u80FD\u6C38\u9060\u770B\u898B\u4F60"
+  - score: 20
+    text: " \u8981\u4E0D\u8981 / \u7576\u6211 / \u5973\u670B\u53CB"
+  - score: 20
+    text: "\u4E00\u8F29\u5B50 / \u53EA\u770B / \u4F60\u4E00\u4EBA"
+  - score: 20
+    text: "\u80FD\u505A\u6211\u7684 / \u5973\u670B\u53CB\u55CE\uFF1F"
   BAD_entriesData:
   - score: -20
     text: "\u597D\u60F3\u8981..."
   - score: -10
+    text: " \u597D\u9999\u5594!"
+  - score: -10
+    text: "\u7D04 / ?"
+  - score: -10
     text: "\u7D04 / \u55CE?"
+  - score: -10
+    text: " \u60F3\u8DDF\u6211 / O\u611B / \u55CE?"
+  - score: -10
+    text: "  \u597D\u60F3\u8DB4\u5728\u4F60 / \u80F8\u524D / \u54C1\u5690 / \u5C6C\u65BC\u6211\u7684
+      / \u51B0\u6DC7\u6DCB"
+  - score: -10
+    text: " \u4F60\u7684 / \u5C0F\u7FF9\u81C0 / \u6BD4\u4EFB\u4F55\u98DF\u7269\u90FD\u4F86\u5F97\u53EF\u53E3"
   DialogObj: {fileID: 6481989855047833600, guid: bb1a7ce72a11d7942856531c9550245b, type: 3}
   spawnPoint:
   - {fileID: 0}
