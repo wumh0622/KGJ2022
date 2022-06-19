@@ -33,9 +33,10 @@ public class GameManager : Singleton<GameManager>
     private bool _gameStart;
     private int _targetIndex = 0;
     private List<float> _changeTargetTime;
-    private Dictionary<AudioKey, List<AudioClip>> _audioDict;
+    private Dictionary<AudioKey, AudioClip> _audioDict;
     public PARTICLEREACTION pARTICLEREACTION;
 
+    public AudioSource mAudioEffectPlayer = null;
     public GameObject winPanel;
     public GameObject losePanel;
     public Text winText;
@@ -62,7 +63,7 @@ public class GameManager : Singleton<GameManager>
     {
         public string name;
         public AudioKey AudioKey;
-        public List<AudioClip> AudioClips = new List<AudioClip>();
+        public AudioClip AudioClips;
     }
 
     protected override void Awake()
@@ -81,6 +82,7 @@ public class GameManager : Singleton<GameManager>
         girl = aiController.mAIData.mAIRoot;
 
         _audioDict = Audios.ToDictionary(info => info.AudioKey, info => info.AudioClips);
+        mAudioEffectPlayer = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -136,18 +138,18 @@ public class GameManager : Singleton<GameManager>
         SetScore(score);
     }
 
-    public bool TryGetRandomAudioClip(AudioKey audioKey, out AudioClip audioClip)
+    public void TryGetRandomAudioClip(AudioKey audioKey/*, out AudioClip audioClip*/)
     {
-        audioClip = null;
+        AudioClip aAudioClip = null;
 
-        if (!_audioDict.TryGetValue(audioKey, out var audioClips) || audioClips.Count == 0)
+        if (!_audioDict.TryGetValue(audioKey, out aAudioClip) || aAudioClip == null)
         {
-            return false;
+            return /*false*/;
         }
+        mAudioEffectPlayer.PlayOneShot(aAudioClip);
+       /* int index = UnityEngine.Random.Range(0, audioClips.Count);
 
-        int index = UnityEngine.Random.Range(0, audioClips.Count);
-
-        return audioClips[index];
+        return audioClips[index];*/
     }
 
     private int GetCurrentTimeIndex(float time)
@@ -237,17 +239,23 @@ public class GameManager : Singleton<GameManager>
             qG.HideAllWord(true);
             if (score > 0)
             {
+                TryGetRandomAudioClip(AudioKey.EnterGood);
+                TryGetRandomAudioClip(AudioKey.ReactionGood);
                 MediatorManager<string>.Instance.Publish(AI_State.State_Shy, this, null);
                 dialog.ShowRespond(AI_State.State_Shy);
                 pARTICLEREACTION.PlayParticle(1);
             }
             else if (score < 0)
             {
+                TryGetRandomAudioClip(AudioKey.EnterBad);
+                TryGetRandomAudioClip(AudioKey.ReactionBad);
                 MediatorManager<string>.Instance.Publish(AI_State.State_Angry, this, null);
                 dialog.ShowRespond(AI_State.State_Angry);
             }
             else
             {
+                TryGetRandomAudioClip(AudioKey.EnterFail);
+                TryGetRandomAudioClip(AudioKey.ReactionEnterFail);
                 MediatorManager<string>.Instance.Publish(AI_State.State_Confuse, this, null);
 
                 dialog.ShowRespond(AI_State.State_Confuse);

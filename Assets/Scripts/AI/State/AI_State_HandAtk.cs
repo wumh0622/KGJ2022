@@ -55,6 +55,7 @@ public class AI_State_HandAtk : MonoBehaviour, StateInterface
                 if (GameManager.Instance.player.transform.transform.position.y  <= 2)
                 {
                     GameManager.Instance.player.transform.transform.DOBlendableLocalMoveBy(new Vector3(mIsLeftAtk ? -2 : 2, 2.5f, 0), 0.3f).SetEase(Ease.OutBounce);
+                    GameManager.Instance.TryGetRandomAudioClip(GameManager.AudioKey.Attack);
                     /*if (shakePos != null)
                     {
                         shakePos.DOShakePosition(0.3f);

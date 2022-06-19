@@ -71,6 +71,7 @@ public class dialog_object : MonoBehaviour
         { 
             return;
         }
+        GameManager.Instance.TryGetRandomAudioClip(GameManager.AudioKey.PickWord);
         rigidbody2D.simulated = false;
         isCollect = true;
         var _dialogBox = DialogBox.GetComponent<Dialog_Box>();

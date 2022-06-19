@@ -83,6 +83,7 @@ public class AI_State_TopAtk : MonoBehaviour, StateInterface
         if (aIsHit && !mIsHitPlayer)
         {
             mIsHitPlayer = true;
+            GameManager.Instance.TryGetRandomAudioClip(GameManager.AudioKey.Attack);
             Vector3 aMovePos = (GameManager.Instance.player.transform.position - iTopPos.position).normalized * 2.5f;
             GameManager.Instance.player.transform.DOBlendableLocalMoveBy(aMovePos, 0.3f).SetEase(Ease.OutBounce);
             Debug.Log("TopAtk Hit =>  Player");
