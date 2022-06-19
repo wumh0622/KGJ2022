@@ -50,6 +50,9 @@ MonoBehaviour:
   DialogText: 2000000000
   DialogBox: {fileID: 0}
   impression: 0
+  entriesSequence: 0
+  Sentencekey: 0
+  isGood: 0
 --- !u!23 &6481989855047833603
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -106,13 +109,13 @@ TextMesh:
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 76
+  m_FontSize: 45
   m_FontStyle: 1
   m_RichText: 1
   m_Font: {fileID: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4280549631
+    rgba: 4278518015
 --- !u!61 &6481989855047833601
 BoxCollider2D:
   m_ObjectHideFlags: 0

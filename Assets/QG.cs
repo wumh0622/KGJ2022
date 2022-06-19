@@ -25,10 +25,15 @@ public class QG : MonoBehaviour
     List<GameObject> inGameDialogEntry = new List<GameObject>();
 
     int currentEntryCount = 0;
+    List<int> selectable = new List<int>();
 
     // Start is called before the first frame update
     void Start()
     {
+        for (int idx = 0; idx < spawnPoint.Length; idx++)
+        {
+            selectable.Add(idx);
+        }
         _MainCamera = Camera.main;
         DialogBox = GameObject.Find("Dialog_Box");
 
@@ -128,9 +133,22 @@ public class QG : MonoBehaviour
         currentEntryCount = 0;
     }
 
+    int lastSelect = -1;
     private Vector3 GetRandomPoint(int idx)
     {
-        return spawnPoint[idx].position + (Random.insideUnitSphere * spawnRadius);
+        int result = 0;
+        int select = Random.Range(0, selectable.Count);
+        result = selectable[select];
+        if (lastSelect >= 0)
+        {
+            selectable.Add(lastSelect);
+        }
+
+        lastSelect = select;
+        selectable.Remove(select);
+
+
+        return spawnPoint[result].position + (Random.insideUnitSphere * spawnRadius);
     }
 
     public void HideAllWord(bool hide)

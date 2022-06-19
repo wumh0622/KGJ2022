@@ -11,6 +11,7 @@ public class dialog_object : MonoBehaviour
     bool isTarget = false;
     public int entriesSequence = 0;
     Rigidbody2D rigidbody2D;
+    TextMesh textMesh;
 
     Vector3 startPoint;
 
@@ -19,6 +20,7 @@ public class dialog_object : MonoBehaviour
 
     private void Awake()
     {
+        textMesh = GetComponent<TextMesh>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         DialogBox = GameObject.Find("Dialog_Box");
     }
@@ -94,5 +96,10 @@ public class dialog_object : MonoBehaviour
     public void ReturnToStartPoint()
     {
         transform.position = startPoint;
+    }
+
+    public void Select(Color color)
+    {
+        textMesh.color = color;
     }
 }
