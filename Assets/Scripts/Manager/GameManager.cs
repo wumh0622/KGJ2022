@@ -35,19 +35,18 @@ public class GameManager : Singleton<GameManager>
 
     public enum AudioKey
     {
-        Attack, //§ğÀ»¡B³Q§ğÀ»
-        HappyEnd, //µ²§½ ¦n
-        BadEnd, //µ²§½ Ãa
-        ReactionBad, //VTuber¤ÏÀ³ ¤Ï·P
-        ReactionEnterFail, //VTuber¤ÏÀ³ ¿ù»~»y¥y
-        ReactionGood, //VTuber¤ÏÀ³ ¦n·P
-        ReactionNormal, //VTuber¤ÏÀ³ ¤@¯ë
-        PickWord, //¾ß¨ì¦r
-        ButtonEnter, //µo°e«öÁä 
-        EnterGood, //¿é¤J¦n·Pµü¥y
-        EnterBad, //¿é¤J¤Ï·Pµü¥y
-        EnterFail, //¿é¤J¿ù»~µü¥y
-        BGM, //¹CÀ¸BGM
+        Attack, //æ”»æ“Šã€è¢«æ”»æ“Š
+        HappyEnd, //çµå±€ å¥½
+        BadEnd, //çµå±€ å£
+        ReactionBad, //VTuberåæ‡‰ åæ„Ÿ
+        ReactionEnterFail, //VTuberåæ‡‰ éŒ¯èª¤èªå¥
+        ReactionGood, //VTuberåæ‡‰ å¥½æ„Ÿ
+        ReactionNormal, //VTuberåæ‡‰ ä¸€èˆ¬
+        PickWord, //æ’¿åˆ°å­—
+        ButtonEnter, //ç™¼é€æŒ‰éµ 
+        EnterGood, //è¼¸å…¥å¥½æ„Ÿè©å¥
+        EnterBad, //è¼¸å…¥åæ„Ÿè©å¥
+        EnterFail, //è¼¸å…¥éŒ¯èª¤è©å¥
     }
 
     [System.Serializable]
