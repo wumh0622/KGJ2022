@@ -20,6 +20,7 @@ public class PlayerCharacter : CharacterBase
     PlayerTriggerler playerTriggerler;
 
     Vector3 lastSafePos;
+    public Transform respawnPoint;
 
     protected override void Awake()
     {
@@ -176,6 +177,6 @@ public class PlayerCharacter : CharacterBase
 
     public void BackToSafePos()
     {
-        transform.position = lastSafePos;
+        transform.position = respawnPoint.position;
     }
 }
