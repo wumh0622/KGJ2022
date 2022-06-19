@@ -19,10 +19,15 @@ MonoBehaviour:
   mAngrySprite: {fileID: 21300000, guid: 7a3780a5d7febce4792956b9b4c697a7, type: 3}
   mShySprite: {fileID: 21300000, guid: 9b849b167348a7d4fbe33d77f52da7c8, type: 3}
   mFadeSpeed: 0.005
-  mStartAtkDelay: 3
+  mAtkLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   mMaxAtkDelay: 5
   mMinAtkDelay: 2
   mTopAtkMaxCount: 7
   mTopAtkMinCount: 3
   mMaxTopAtkSpeed: 0.5
   mMinTopAtkSpeed: 0.25
+  mTopCheckAtkPos: {x: 1, y: 1, z: 1}
+  mHandMoveToTopTime: 0.55
+  mHandMoveDownTime: 0.2

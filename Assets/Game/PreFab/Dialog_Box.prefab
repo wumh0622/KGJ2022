@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7946489111647044191}
   - component: {fileID: 7946489111647044188}
+  - component: {fileID: 925396170}
+  - component: {fileID: 925396169}
   m_Layer: 0
   m_Name: Dialog_Box
   m_TagString: Untagged
@@ -43,4 +45,84 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d393e2208a8b81a42bb10a713ec9bc05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Underscore: {fileID: 0}
+  characterName: "\u5E73\u5E73\u5B50\uFF1A "
+  feedBack_What:
+  - "\u600E\u9EBC\u4E0D\u8AAA\u8A71?"
+  feedBack_Normal:
+  - "\u03A3( \xB0 \u25B3 \xB0)"
+  feedBack_Good:
+  - "(\xB4///\u2601///`)"
+  feedBack_Bad:
+  - " (*>\uFE4F<*)\xD7NO"
+  feedBack_Win:
+  - " \u300C\u592A\u68D2\u4E86\uFF0C\u6211\u4E5F\u4E00\u76F4\u90FD\u559C\u6B61\u4F60\uFF01\u300D"
+  feedBack_lose:
+  - " \u300C\u4F60\u7684\u544A\u767D\u5C31\u50CF\u662F\u5728\u5C0D\u6211\u6F51\u5C4E\u3002\u300D"
+  Underscore: {fileID: 3387411171885884340, guid: 7f42e6b863626f5408528ce41a2ba49d, type: 3}
+  qg: {fileID: 0}
+--- !u!23 &925396170
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946489111647044189}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!102 &925396169
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946489111647044189}
+  m_Text: '
+
+
+'
+  m_OffsetZ: 0
+  m_CharacterSize: 0.1
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 3.65
+  m_FontSize: 78
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4291035391

@@ -17,8 +17,6 @@ public class PlayerCharacter : CharacterBase
     public GameObject Girl;
     public ParticleSystem scanEffect;
 
-    public Dialog_Box dialog;
-
     Vector3 lastSafePos;
 
     protected override void Awake()
@@ -125,7 +123,7 @@ public class PlayerCharacter : CharacterBase
 
         if (Input.GetButtonDown("Confirm"))
         {
-            Debug.Log(dialog.CheckWord());
+            GameManager.Instance.ConfirmWord();
         }
     }
 
