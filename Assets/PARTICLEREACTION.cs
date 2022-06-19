@@ -15,7 +15,7 @@ public class PARTICLEREACTION : MonoBehaviour
         Particle_LIST.Add(QuestionMark);
         Particle_LIST.Add(Heart);
 
-        StartCoroutine(ExampleCoroutine());
+        //StartCoroutine(ExampleCoroutine());
     }
 
     // Update is called once per frame
