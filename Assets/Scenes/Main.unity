@@ -1548,17 +1548,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimerText: {fileID: 742154963}
-  ScoreBar: {fileID: 1103381877}
+  ScoreBar: {fileID: 0}
   ScoreMax: 100
   PresetTime: 0
   ChangeTargetTime: []
-  _time: 0
   player: {fileID: 1257724757}
   AiData: {fileID: 11400000, guid: a1e00ca450ec88947baec81cd735c556, type: 2}
   aiController: {fileID: 1911676288}
   girl: {fileID: 0}
   qG: {fileID: 0}
   dialog: {fileID: 0}
+  Audios:
+  - name: Attack
+    AudioKey: 0
+    AudioClips: []
+  - name: Reaction Enter Fail
+    AudioKey: 4
+    AudioClips: []
+  - name: Reaction Good
+    AudioKey: 5
+    AudioClips: []
+  - name: Reaction Normal
+    AudioKey: 6
+    AudioClips: []
+  - name: Reaction Bad
+    AudioKey: 3
+    AudioClips: []
+  - name: Pick Word
+    AudioKey: 7
+    AudioClips: []
+  - name: Button Enter
+    AudioKey: 8
+    AudioClips: []
+  - name: Enter Good
+    AudioKey: 9
+    AudioClips: []
+  - name: Enter Bad
+    AudioKey: 10
+    AudioClips: []
+  - name: Enter Fail
+    AudioKey: 11
+    AudioClips: []
+  - name: BGM
+    AudioKey: 12
+    AudioClips: []
+  - name: Happy End
+    AudioKey: 1
+    AudioClips: []
+  - name: Bad End
+    AudioKey: 2
+    AudioClips: []
 --- !u!4 &2109349210
 Transform:
   m_ObjectHideFlags: 0
