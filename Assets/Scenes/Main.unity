@@ -1548,17 +1548,68 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimerText: {fileID: 742154963}
-  ScoreBar: {fileID: 1103381877}
+  ScoreBar: {fileID: 0}
   ScoreMax: 100
   PresetTime: 0
   ChangeTargetTime: []
-  _time: 0
   player: {fileID: 1257724757}
   AiData: {fileID: 11400000, guid: a1e00ca450ec88947baec81cd735c556, type: 2}
   aiController: {fileID: 1911676288}
   girl: {fileID: 0}
   qG: {fileID: 0}
   dialog: {fileID: 0}
+  Audios:
+  - name: Attack
+    AudioKey: 0
+    AudioClips:
+    - {fileID: 8300000, guid: 3a2ccdf7dd0e6304a8254e536ffafbc6, type: 3}
+    - {fileID: 8300000, guid: aac4c153318a2444ba7888a6c94bd213, type: 3}
+    - {fileID: 8300000, guid: 729aefa0873e6cf4cb7b4006c33e3c2b, type: 3}
+  - name: Reaction Enter Fail
+    AudioKey: 4
+    AudioClips:
+    - {fileID: 8300000, guid: ac3f0cf55cd78d440bbc9ccf7d2924cc, type: 3}
+  - name: Reaction Good
+    AudioKey: 5
+    AudioClips:
+    - {fileID: 8300000, guid: 8cf1b3b70258aae4db58a81f3ccf702f, type: 3}
+    - {fileID: 8300000, guid: 3a0afc890030c04438cc7130a2b4a142, type: 3}
+  - name: Reaction Normal
+    AudioKey: 6
+    AudioClips:
+    - {fileID: 8300000, guid: c56de4cd9ff8f164ea5e16eb54995b44, type: 3}
+  - name: Reaction Bad
+    AudioKey: 3
+    AudioClips:
+    - {fileID: 8300000, guid: ce6db139a0d4eac4d9f7dcde0cd63f18, type: 3}
+    - {fileID: 8300000, guid: 984ca67ebcc71314598ff5d716d783f5, type: 3}
+  - name: Pick Word
+    AudioKey: 7
+    AudioClips:
+    - {fileID: 8300000, guid: 5f34c691f7c1ed043b4db6fb324c5848, type: 3}
+  - name: Button Enter
+    AudioKey: 8
+    AudioClips: []
+  - name: Enter Good
+    AudioKey: 9
+    AudioClips:
+    - {fileID: 8300000, guid: 6d4bc95eee7c8e24381cb5d874d1b8a8, type: 3}
+  - name: Enter Bad
+    AudioKey: 10
+    AudioClips:
+    - {fileID: 8300000, guid: f4ec0cb24974a9d4aac75ae2ed800946, type: 3}
+  - name: Enter Fail
+    AudioKey: 11
+    AudioClips:
+    - {fileID: 8300000, guid: 21bdea9dd68372c4bb81b8d78aac6ce4, type: 3}
+  - name: Happy End
+    AudioKey: 1
+    AudioClips:
+    - {fileID: 8300000, guid: 80ec2eeadc7eac44f92ccb92674d434f, type: 3}
+  - name: Bad End
+    AudioKey: 2
+    AudioClips:
+    - {fileID: 8300000, guid: ee2b0c61ffb9e5e4ebc82debc9804151, type: 3}
 --- !u!4 &2109349210
 Transform:
   m_ObjectHideFlags: 0

@@ -24,6 +24,8 @@ public class QG : MonoBehaviour
     List<Entries> BAD_entries_LIST = new List<Entries>();
     List<GameObject> inGameDialogEntry = new List<GameObject>();
 
+    int currentEntryCount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,9 +78,11 @@ public class QG : MonoBehaviour
     public void createQuestion()
     {
         HideAllWord(false);
+        Reset_CurrentEntryCount();
         int itemIndex = Random.Range(0, GOOD_entries_LIST.Count);
         setEntryList(GOOD_entries_LIST[itemIndex], itemIndex, true);
-        setEntryList(BAD_entries_LIST[itemIndex], itemIndex, true);
+        itemIndex = Random.Range(0, BAD_entries_LIST.Count);
+        setEntryList(BAD_entries_LIST[itemIndex], itemIndex, false);
     }
 
     void setEntryList(Entries _entry, int key, bool isGood)
@@ -87,7 +91,8 @@ public class QG : MonoBehaviour
         var _dialogBox = DialogBox.GetComponent<Dialog_Box>();
         _dialogBox.SetQuestion(EntryCount);
 
-        while (EntryCount > inGameDialogEntry.Count)
+        currentEntryCount += EntryCount;
+        while (currentEntryCount > inGameDialogEntry.Count)
         {
             GameObject prefab = Instantiate(DialogObj, transform);
             prefab.active = false;
@@ -95,31 +100,32 @@ public class QG : MonoBehaviour
         }
 
         int index = 0;
-        foreach (GameObject underline in inGameDialogEntry)
+        int EntryIndex = 0;
+        foreach (GameObject DialogInstance in inGameDialogEntry)
         {
-
-            if (index < EntryCount)
+            if (index < currentEntryCount && index >= currentEntryCount - EntryCount)
             {
-                underline.active = true;
-
-                //float spawnY = Random.Range
-                //    (_MainCamera.ScreenToWorldPoint(new Vector2(0, 0)).y, _MainCamera.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
-                //float spawnX = Random.Range
-                //    (_MainCamera.ScreenToWorldPoint(new Vector2(0, 0)).x, _MainCamera.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
-                //Vector3 spawnPosition = new Vector3(spawnX, spawnY, -0.01f);
-                underline.transform.position = GetRandomPoint(index % spawnPoint.Length);
+                DialogInstance.active = true;
+                DialogInstance.transform.position = GetRandomPoint(index % spawnPoint.Length);
 
                 var _dialogScript = inGameDialogEntry[index].GetComponent<dialog_object>();
-                _dialogScript.SetDialog(_entry.entry[index], index, true, key, _entry.score);
+                _dialogScript.SetDialog(_entry.entry[EntryIndex], EntryIndex, true, key, _entry.score);
                 _dialogScript.isGood = isGood;
 
+                EntryIndex++;
             }
-            else
+            else if (index > currentEntryCount)
             {
-                underline.active = false;
+                DialogInstance.active = false;
             }
+
             index++;
         }
+    }
+
+    void Reset_CurrentEntryCount()
+    {
+        currentEntryCount = 0;
     }
 
     private Vector3 GetRandomPoint(int idx)

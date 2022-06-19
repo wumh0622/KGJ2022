@@ -15,13 +15,6 @@ public class GameManager : Singleton<GameManager>
     public int PresetTime;
     public List<float> ChangeTargetTime;
 
-    private int _score;
-    public float _time;
-    private List<float> _changeTargetTime;
-
-    private bool _gameStart;
-    private int _targetIndex = 0;
-
     public GameObject player;
 
     public AI_Data AiData;
@@ -31,6 +24,38 @@ public class GameManager : Singleton<GameManager>
     public QG qG;
     public Dialog_Box dialog;
 
+    public List<AudioInfo> Audios;
+
+    private int _score;
+    private float _time;
+    private bool _gameStart;
+    private int _targetIndex = 0;
+    private List<float> _changeTargetTime;
+    private Dictionary<AudioKey, List<AudioClip>> _audioDict;
+
+    public enum AudioKey
+    {
+        Attack, //攻擊、被攻擊
+        HappyEnd, //結局 好
+        BadEnd, //結局 壞
+        ReactionBad, //VTuber反應 反感
+        ReactionEnterFail, //VTuber反應 錯誤語句
+        ReactionGood, //VTuber反應 好感
+        ReactionNormal, //VTuber反應 一般
+        PickWord, //撿到字
+        ButtonEnter, //發送按鍵 
+        EnterGood, //輸入好感詞句
+        EnterBad, //輸入反感詞句
+        EnterFail, //輸入錯誤詞句
+    }
+
+    [System.Serializable]
+    public class AudioInfo
+    {
+        public string name;
+        public AudioKey AudioKey;
+        public List<AudioClip> AudioClips = new List<AudioClip>();
+    }
 
     protected override void Awake()
     {
@@ -46,6 +71,7 @@ public class GameManager : Singleton<GameManager>
         MediatorManager<AI_Data>.Instance.Publish(AI_State.SetAI, this, new MediatorArgs<AI_Data>(AiData));
         girl = aiController.mAIData.mAIRoot;
 
+        _audioDict = Audios.ToDictionary(info => info.AudioKey, info => info.AudioClips);
     }
 
     void Update()
@@ -99,6 +125,20 @@ public class GameManager : Singleton<GameManager>
         }
 
         SetScore(score);
+    }
+
+    public bool TryGetRandomAudioClip(AudioKey audioKey, out AudioClip audioClip)
+    {
+        audioClip = null;
+
+        if (!_audioDict.TryGetValue(audioKey, out var audioClips) || audioClips.Count == 0)
+        {
+            return false;
+        }
+
+        int index = UnityEngine.Random.Range(0, audioClips.Count);
+
+        return audioClips[index];
     }
 
     private int GetCurrentTimeIndex(float time)

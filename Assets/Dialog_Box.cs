@@ -209,20 +209,25 @@ public class Dialog_Box : MonoBehaviour
             }
         }
 
-        if (isGood)
+        if (score != 0)
         {
-            Entries newEnt = new Entries(score, qg.GOOD_entriesData[currentKey].text);
-            if (newEnt.size != getWords.Count)
+            if (isGood)
             {
-                score = 0;
+
+                Entries newEnt = new Entries(score, qg.GOOD_entriesData[currentKey].text);
+                if (newEnt.size != getWords.Count)
+                {
+                    score = 0;
+                }
+
             }
-        }
-        else
-        {
-            Entries newEnt = new Entries(score, qg.BAD_entriesData[currentKey].text);
-            if (newEnt.size != getWords.Count)
+            else
             {
-                score = 0;
+                Entries newEnt = new Entries(score, qg.BAD_entriesData[currentKey].text);
+                if (newEnt.size != getWords.Count)
+                {
+                    score = 0;
+                }
             }
         }
         getWords.Clear();
