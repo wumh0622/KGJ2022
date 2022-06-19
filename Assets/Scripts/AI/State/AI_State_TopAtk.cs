@@ -20,7 +20,9 @@ public class AI_State_TopAtk : MonoBehaviour, StateInterface
     }
     public void Skip()
     {
+        Pos_TopLeft.DOComplete();
         Pos_TopLeft.DOKill();
+        Pos_TopRight.DOComplete();
         Pos_TopRight.DOKill();
         AtkFinish();
     }

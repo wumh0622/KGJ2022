@@ -10,7 +10,8 @@ public interface StateInterface
 public class AI_Controller : MonoBehaviour
 {
     public AI_Data mAIData { get; private set; } = null;
-    
+    public FreqCon.AudioPeer mAudioPeer = null;
+
     private StateInterface mCurState = null;
     private AI_State_None mState_None = new AI_State_None();
     private AI_State_Angry mState_Angry = new AI_State_Angry();
@@ -110,10 +111,12 @@ public class AI_Controller : MonoBehaviour
             GameObject aClearObj = mAIData.mAIRoot;
             StartCoroutine(mAIData.FadeOut(mAIData.mRenderer));
             Sequence aSeq = DOTween.Sequence();
+            mAudioPeer.mAI_Data = null;
             aSeq.AppendInterval(2).OnComplete(() => DestroyImmediate(aClearObj));
         }
         mAIData = iArgs.Args;
         mAIData.CreatAI(transform);
+        mAudioPeer.mAI_Data = mAIData;
         mState_TopAtk = mAIData.mAIRoot.GetComponentInChildren<AI_State_TopAtk>();
         mState_HandAtk = mAIData.mAIRoot.GetComponentInChildren<AI_State_HandAtk>();
         StartCoroutine(mAIData.FadeIn(mAIData.mRenderer));

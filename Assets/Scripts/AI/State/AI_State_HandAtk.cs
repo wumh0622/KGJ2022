@@ -34,7 +34,9 @@ public class AI_State_HandAtk : MonoBehaviour, StateInterface
     }
     public void Skip()
     {
+        Pos_HandLeft.DOComplete();
         Pos_HandLeft.DOKill();
+        Pos_HandRight.DOComplete();
         Pos_HandRight.DOKill();
         AtkFinish();
     }

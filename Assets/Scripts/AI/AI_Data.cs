@@ -7,10 +7,11 @@ public class AI_Data : ScriptableObject
     [HideInInspector] public SpriteRenderer mRenderer = null;
     [HideInInspector] public SpriteRenderer mEventRenderer = null;
     [HideInInspector] public GameObject mAIRoot = null;
+    [HideInInspector] public AI_GetBonePos mGetBonePos = null;
     public GameObject mAIObj = null;
     public Sprite mAngrySprite = null;
     public Sprite mShySprite = null;
-    public Sprite mConfuseSprite = null;
+    public Sprite mConfuseSprite = null;    
 
     [Header("反應圖位置偏移")]
     public Vector3 mEventRendererOffset = Vector3.zero;
@@ -43,6 +44,7 @@ public class AI_Data : ScriptableObject
     {
         mAIRoot = Instantiate(mAIObj, iParent);
         mRenderer = mAIRoot.GetComponentInChildren<SpriteRenderer>();
+        mGetBonePos = mAIRoot.GetComponent<AI_GetBonePos>();
         InitData();
         GameObject aEventRender = new GameObject("EventRender");
         aEventRender.transform.SetParent(mAIRoot.transform);
