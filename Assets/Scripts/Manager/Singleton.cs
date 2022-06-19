@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Singleton<T> : MonoBehaviour where T : Component
 {
-	
+	public bool destoryOnLoad = true;
 	#region Fields
 
 	/// <summary>
@@ -50,7 +50,11 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
 		if ( instance == null )
 		{
 			instance = this as T;
-			DontDestroyOnLoad ( gameObject );
+			if(destoryOnLoad)
+            {
+				DontDestroyOnLoad(gameObject);
+			}
+
 		}
 		else
 		{
