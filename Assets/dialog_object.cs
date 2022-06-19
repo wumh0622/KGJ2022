@@ -9,11 +9,18 @@ public class dialog_object : MonoBehaviour
     public int impression = 0;
     bool isCollect = false;
     bool isTarget = false;
-    int entriesSequence = 0;
+    public int entriesSequence = 0;
+    Rigidbody2D rigidbody2D;
+
+    Vector3 startPoint;
+
+    public int Sentencekey;
+    public bool isGood;
 
     // Start is called before the first frame update
     void Start()
     {
+        rigidbody2D = GetComponent<Rigidbody2D>();
         DialogBox = GameObject.Find("Dialog_Box");
         //StartCoroutine(ExampleCoroutine());
     }
@@ -24,8 +31,11 @@ public class dialog_object : MonoBehaviour
 
     }
 
-    public void SetDialog(string newText, int Sequence, bool _isTarget)
+    public void SetDialog(string newText, int Sequence, bool _isTarget, int key, int score)
     {
+        impression = score;
+        Sentencekey = key;
+        startPoint = transform.position;
         isCollect = false;
         entriesSequence = Sequence;
         isTarget = _isTarget;
@@ -47,16 +57,16 @@ public class dialog_object : MonoBehaviour
         //                             _newTextMeshBounds.size.z / transform.lossyScale.z);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Collect()
     {
         if(isCollect)
         { 
             return;
         }
-
+        rigidbody2D.simulated = false;
         isCollect = true;
         var _dialogBox = DialogBox.GetComponent<Dialog_Box>();
-        _dialogBox.GetNewDialog(this.gameObject);
+        _dialogBox.GetNewDialog(this);
     }
 
     string GetDialog()
@@ -73,5 +83,10 @@ public class dialog_object : MonoBehaviour
     {
         yield return new WaitForSeconds(3.0f);
         //SetDialog(DialogText);
+    }
+
+    public void ReturnToStartPoint()
+    {
+        transform.position = startPoint;
     }
 }

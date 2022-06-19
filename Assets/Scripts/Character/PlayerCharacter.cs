@@ -17,6 +17,8 @@ public class PlayerCharacter : CharacterBase
     public GameObject Girl;
     public ParticleSystem scanEffect;
 
+    public Dialog_Box dialog;
+
     Vector3 lastSafePos;
 
     protected override void Awake()
@@ -120,16 +122,22 @@ public class PlayerCharacter : CharacterBase
                 }
             }
         }
+
+        if (Input.GetButtonDown("Confirm"))
+        {
+            Debug.Log(dialog.CheckWord());
+        }
     }
 
     private void Scan()
     {
+        Girl = GameManager.Instance.girl;
         ColliderDrawer[] platforms = Girl.GetComponentsInChildren<ColliderDrawer>();
         foreach (ColliderDrawer item in platforms)
         {
-            scanEffect.Play();
             item.ShowScanEffect();
         }
+        scanEffect.Play();
     }
 
     protected void JumpUpdate()

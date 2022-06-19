@@ -1,5 +1,79 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1555438515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1555438516}
+  - component: {fileID: 1555438518}
+  - component: {fileID: 1555438517}
+  m_Layer: 11
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1555438516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555438515}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3183223845121588758}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1555438518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555438515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 431973445d05ec745bd1f611ca26f266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filter2D:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+--- !u!58 &1555438517
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555438515}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.69450593}
+  serializedVersion: 2
+  m_Radius: 1.1945059
 --- !u!1 &1659554417
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +85,7 @@ GameObject:
   - component: {fileID: 1659554418}
   - component: {fileID: 1659554420}
   - component: {fileID: 1659554419}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ScanEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,9 +120,9 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -4873,7 +4947,7 @@ GameObject:
   - component: {fileID: 3183223844183052418}
   - component: {fileID: 3183223844183052417}
   - component: {fileID: 3183223844183052416}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4937,7 +5011,7 @@ GameObject:
   - component: {fileID: 3183223844252432710}
   - component: {fileID: 3183223844252432708}
   - component: {fileID: 3183223844252432709}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: AttackTrigger_Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5018,7 +5092,7 @@ GameObject:
   - component: {fileID: 3183223845121588756}
   - component: {fileID: 3183223845121589738}
   - component: {fileID: 3183223845121589737}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: PrototypeCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5039,6 +5113,7 @@ Transform:
   - {fileID: 3183223844183052418}
   - {fileID: 3183223844252432710}
   - {fileID: 1659554418}
+  - {fileID: 1555438516}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5081,7 +5156,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 300ea1a5869382b43bf6149aba92c4db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5193,9 +5268,9 @@ MonoBehaviour:
     airControl: 0.7
     wallJump: 2000
     jumpInfos:
-    - jumpHeight: 8000
-      jumpStartForce: 8
     - jumpHeight: 5000
+      jumpStartForce: 8
+    - jumpHeight: 3000
       jumpStartForce: 8
     wallJumpInfo:
       jumpHeight: 9000
@@ -5233,7 +5308,8 @@ MonoBehaviour:
     crouchDetectYOffset: 0.05
     crouchDetectDistance: 0.1
   Girl: {fileID: 0}
-  scanEffect: {fileID: 0}
+  scanEffect: {fileID: 1659554420}
+  dialog: {fileID: 0}
 --- !u!70 &3183223845121588757
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5247,8 +5323,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0039224625, y: 0.7272823}
-  m_Size: {x: 0.56853676, y: 1.3659592}
+  m_Offset: {x: 0.00009036064, y: 0.47848576}
+  m_Size: {x: 0.36789435, y: 0.8683661}
   m_Direction: 0
 --- !u!95 &3183223845121588756
 Animator:

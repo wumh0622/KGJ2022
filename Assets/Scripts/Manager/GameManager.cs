@@ -24,11 +24,18 @@ public class GameManager : Singleton<GameManager>
 
     public GameObject player;
 
+    public AI_Data AiData;
+    public AI_Controller aiController;
+    public GameObject girl;
+
     void Start()
     {
         Init();
 
         _gameStart = true;
+        MediatorManager<AI_Data>.Instance.Publish(AI_State.SetAI, this, new MediatorArgs<AI_Data>(AiData));
+        girl = aiController.mAIData.mAIRoot;
+
     }
 
     void Update()

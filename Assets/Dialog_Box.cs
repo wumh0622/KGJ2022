@@ -13,9 +13,15 @@ public class Dialog_Box : MonoBehaviour
     float UnderscopeSizeX;
     int entriesCOUNTER = 0;
     int currentENTRIES = 0;
+
+    public QG qg;
+
+    List<dialog_object> getWords = new List<dialog_object>();
+
     // Start is called before the first frame update
     void Start()
     {
+        qg = FindObjectOfType<QG>();
         OGPOSITION = this.transform.position;
         ProcessPOSITION = OGPOSITION;
         UnderscoreProcessPOSITION = OGPOSITION;
@@ -68,8 +74,9 @@ public class Dialog_Box : MonoBehaviour
         entriesCOUNTER = 0;
     }
 
-    public void GetNewDialog(GameObject newDialog)
+    public void GetNewDialog(dialog_object newDialog)
     {
+        getWords.Add(newDialog);
         newDialog.transform.position = new Vector3(ProcessPOSITION.x, ProcessPOSITION.y, ProcessPOSITION.z);
 
         var _textMesh = newDialog.GetComponentInChildren<TextMesh>();
@@ -108,5 +115,67 @@ public class Dialog_Box : MonoBehaviour
         {
             //do send message
         }
+    }
+
+    public int CheckWord()
+    {
+        int currentKey = -1;
+        int lastIdx = -1;
+        int score = 0;
+        if(getWords.Count == 0)
+        {
+            return 0;
+        }
+
+        foreach (dialog_object item in getWords)
+        {
+            
+            if (item.isGood)
+            {
+                Entries newEnt = new Entries(item.impression, qg.GOOD_entriesData[item.Sentencekey].text);
+                if(newEnt.size == 1)
+                {
+                    return item.impression;
+                }
+            }
+            else
+            {
+                Entries newEnt = new Entries(item.impression, qg.BAD_entriesData[item.Sentencekey].text);
+                if (newEnt.size == 1)
+                {
+                    return item.impression;
+                }
+            }
+
+            if(currentKey < 0)
+            {
+                currentKey = item.Sentencekey;
+            }
+            else
+            {
+                if(item.Sentencekey != currentKey)
+                {
+                    return 0;
+                }
+            }
+
+            if(lastIdx < 0)
+            {
+                lastIdx = item.entriesSequence;
+            }
+            else
+            {
+                if (lastIdx + 1 == item.entriesSequence)
+                {
+                    lastIdx = item.entriesSequence;
+                    score = item.impression;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+        return score;
     }
 }

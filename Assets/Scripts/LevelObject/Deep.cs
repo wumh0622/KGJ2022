@@ -8,15 +8,33 @@ public class Deep : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!filter2D.IsFilteringLayerMask(collision.gameObject))
-        {
-            return;
-        }
 
         PlayerCharacter player = collision.gameObject.GetComponent<PlayerCharacter>();
         if(player)
         {
             player.BackToSafePos();
+        }
+
+        dialog_object dialog_Object = collision.gameObject.GetComponent<dialog_object>();
+        if(dialog_Object)
+        {
+            dialog_Object.ReturnToStartPoint();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        PlayerCharacter player = collision.gameObject.GetComponent<PlayerCharacter>();
+        if (player)
+        {
+            player.BackToSafePos();
+        }
+
+        dialog_object dialog_Object = collision.gameObject.GetComponent<dialog_object>();
+        if (dialog_Object)
+        {
+            dialog_Object.ReturnToStartPoint();
         }
     }
 }
