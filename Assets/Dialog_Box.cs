@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Dialog_Box : MonoBehaviour
 {
+    public string characterName;
+    public string[] feedBack_What;
+    public string[] feedBack_Normal;
+    public string[] feedBack_Good;
+    public string[] feedBack_Bad;
+
+    public string[] feedBack_Win;
+    public string[] feedBack_lose;
     Vector3 OGPOSITION;
     Vector3 ProcessPOSITION;
     Vector3 UnderscoreProcessPOSITION;
@@ -17,6 +25,13 @@ public class Dialog_Box : MonoBehaviour
     public QG qg;
 
     List<dialog_object> getWords = new List<dialog_object>();
+
+    TextMesh textMesh;
+
+    private void Awake()
+    {
+        textMesh = GetComponent<TextMesh>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -117,11 +132,22 @@ public class Dialog_Box : MonoBehaviour
         }
     }
 
+    public bool HaveWord()
+    {
+        if (getWords.Count == 0)
+        {
+            return false;
+            
+        }
+        return true;
+    }
+
     public int CheckWord()
     {
         int currentKey = -1;
         int lastIdx = -1;
         int score = 0;
+        bool isGood = true;
         if(getWords.Count == 0)
         {
             return 0;
@@ -129,13 +155,15 @@ public class Dialog_Box : MonoBehaviour
 
         foreach (dialog_object item in getWords)
         {
-            
+            isGood = item.isGood;
             if (item.isGood)
             {
                 Entries newEnt = new Entries(item.impression, qg.GOOD_entriesData[item.Sentencekey].text);
                 if(newEnt.size == 1)
                 {
-                    return item.impression;
+                    currentKey = item.Sentencekey;
+                    score = item.impression;
+                    break;
                 }
             }
             else
@@ -143,7 +171,9 @@ public class Dialog_Box : MonoBehaviour
                 Entries newEnt = new Entries(item.impression, qg.BAD_entriesData[item.Sentencekey].text);
                 if (newEnt.size == 1)
                 {
-                    return item.impression;
+                    currentKey = item.Sentencekey;
+                    score = item.impression;
+                    break;
                 }
             }
 
@@ -155,7 +185,8 @@ public class Dialog_Box : MonoBehaviour
             {
                 if(item.Sentencekey != currentKey)
                 {
-                    return 0;
+                    score = 0;
+                    break;
                 }
             }
 
@@ -172,10 +203,53 @@ public class Dialog_Box : MonoBehaviour
                 }
                 else
                 {
-                    return 0;
+                    score = 0;
+                    break;
                 }
             }
         }
+
+        if (isGood)
+        {
+            Entries newEnt = new Entries(score, qg.GOOD_entriesData[currentKey].text);
+            if (newEnt.size != getWords.Count)
+            {
+                score = 0;
+            }
+        }
+        else
+        {
+            Entries newEnt = new Entries(score, qg.BAD_entriesData[currentKey].text);
+            if (newEnt.size != getWords.Count)
+            {
+                score = 0;
+            }
+        }
+        getWords.Clear();
+
         return score;
+    }
+
+    public void ShowRespond(string state)
+    {
+        switch (state)
+        {
+            case AI_State.State_Angry:
+                textMesh.text = characterName + feedBack_Bad[Random.Range(0, feedBack_Bad.Length)];
+                break;
+            case AI_State.State_Shy:
+                textMesh.text = characterName + feedBack_Good[Random.Range(0, feedBack_Good.Length)];
+                break;
+            case AI_State.State_Nothing:
+                textMesh.text = characterName + feedBack_What[Random.Range(0, feedBack_What.Length)];
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void ClearRespond()
+    {
+        textMesh.text = "";
     }
 }

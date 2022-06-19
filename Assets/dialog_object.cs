@@ -17,11 +17,16 @@ public class dialog_object : MonoBehaviour
     public int Sentencekey;
     public bool isGood;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         DialogBox = GameObject.Find("Dialog_Box");
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
         //StartCoroutine(ExampleCoroutine());
     }
 
@@ -33,6 +38,7 @@ public class dialog_object : MonoBehaviour
 
     public void SetDialog(string newText, int Sequence, bool _isTarget, int key, int score)
     {
+        rigidbody2D.simulated = true;
         impression = score;
         Sentencekey = key;
         startPoint = transform.position;
