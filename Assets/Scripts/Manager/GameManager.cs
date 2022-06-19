@@ -8,7 +8,7 @@ public class GameManager : Singleton<GameManager>
 {
     [Header("GameObject")]
     public Text TimerText;
-    public Slider ScoreBar;
+    public Image ScoreBar;
 
     [Header("Setting")]
     public int ScoreMax;
@@ -28,6 +28,16 @@ public class GameManager : Singleton<GameManager>
     public AI_Controller aiController;
     public GameObject girl;
 
+    public QG qG;
+    public Dialog_Box dialog;
+
+
+    protected override void Awake()
+    {
+        qG = FindObjectOfType<QG>();
+        dialog = FindObjectOfType<Dialog_Box>();
+    }
+
     void Start()
     {
         Init();
@@ -41,12 +51,12 @@ public class GameManager : Singleton<GameManager>
     void Update()
     {
         //Test
-        if (Input.GetKeyUp(KeyCode.Q))
+        if (Input.GetKeyUp(KeyCode.O))
         {
             IncreaseScore(1);
         }
 
-        if (Input.GetKeyUp(KeyCode.W))
+        if (Input.GetKeyUp(KeyCode.L))
         {
             DecreaseScore(1);
         }
@@ -68,6 +78,12 @@ public class GameManager : Singleton<GameManager>
         {
             score = ScoreMax;
             OnScoreMax();
+        }
+
+        if (score <= 0)
+        {
+            score = 0;
+            OnScoreZero();
         }
 
         SetScore(score);
@@ -146,23 +162,57 @@ public class GameManager : Singleton<GameManager>
         SetScore(0);
     }
 
-    private void SetScore(int score, int scoreMax = -1)
+    private void SetScore(int score)
     {
         _score = score;
-        ScoreBar.value = score;
-
-        if(scoreMax != -1)
-        {
-            ScoreBar.maxValue = scoreMax;
-        }
+        ScoreBar.fillAmount = (float)score / (float)ScoreMax;
     }
 
     private void Init()
     {
-        SetScore(0, ScoreMax);
+        SetScore(0);
 
         _time = PresetTime;
 
         _changeTargetTime = ChangeTargetTime.OrderByDescending(e => e).ToList();
     }
+
+    public void ConfirmWord()
+    {
+        if(dialog.HaveWord())
+        {
+            int score = dialog.CheckWord();
+            qG.HideAllWord(true);
+            if (score > 0)
+            {
+                MediatorManager<string>.Instance.Publish(AI_State.State_Shy, this, null);
+                dialog.ShowRespond(AI_State.State_Shy);
+            }
+            else if (score < 0)
+            {
+                MediatorManager<string>.Instance.Publish(AI_State.State_Angry, this, null);
+                dialog.ShowRespond(AI_State.State_Angry);
+            }
+            else
+            {
+                MediatorManager<string>.Instance.Publish(AI_State.State_Nothing, this, null);
+
+                dialog.ShowRespond(AI_State.State_Nothing);
+            }
+
+            IncreaseScore(score);
+
+
+            SimpleTimerManager.Instance.RunTimer(NextStep, 3.0f);
+        }
+        
+    }
+
+    public void NextStep()
+    {
+        MediatorManager<string>.Instance.Publish(AI_State.State_Nothing, this, null);
+        qG.createQuestion();
+        dialog.ClearRespond();
+    }
+
 }

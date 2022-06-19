@@ -73,9 +73,11 @@ public class QG : MonoBehaviour
         
     }
 
-    void createQuestion()
+    public void createQuestion()
     {
+        HideAllWord(false);
         int itemIndex = Random.Range(0, GOOD_entries_LIST.Count);
+        setEntryList(GOOD_entries_LIST[itemIndex], itemIndex, true);
         setEntryList(BAD_entries_LIST[itemIndex], itemIndex, true);
     }
 
@@ -123,6 +125,15 @@ public class QG : MonoBehaviour
     private Vector3 GetRandomPoint(int idx)
     {
         return spawnPoint[idx].position + (Random.insideUnitSphere * spawnRadius);
+    }
+
+    public void HideAllWord(bool hide)
+    {
+        dialog_object[] dialog_Object = GetComponentsInChildren<dialog_object>();
+        foreach (var item in dialog_Object)
+        {
+            item.gameObject.SetActive(!hide);
+        }
     }
 }
 
